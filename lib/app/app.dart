@@ -24,6 +24,32 @@ class _CraftyBayState extends State<CraftyBay> {
         textTheme: TextTheme(
           titleLarge: TextStyle(fontSize: 28, fontWeight: FontWeight.w600),
         ),
+        inputDecorationTheme: InputDecorationTheme(
+          contentPadding: EdgeInsets.symmetric(horizontal: 16),
+          border: OutlineInputBorder(
+            borderSide: BorderSide(color: AppColors.themeColor),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: AppColors.themeColor),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.red),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: AppColors.themeColor),
+          ),
+          hintStyle: TextStyle(fontWeight: FontWeight.w400, color: Colors.grey),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            fixedSize: Size.fromWidth(double.maxFinite),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+            backgroundColor: AppColors.themeColor,
+            foregroundColor: Colors.white,
+          ),
+        ),
       ),
       localizationsDelegates: [
         AppLocalizations.delegate,
