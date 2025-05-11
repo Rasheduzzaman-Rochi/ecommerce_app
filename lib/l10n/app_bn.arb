@@ -1,3 +1,8 @@
 {
-    "helloWorld": "Hello World bn"
+    "version": "সংস্করণ",
+    "welcomeBack": "স্বাগত",
+    "enterYourEmailAndPassword": "আপনার ই-মেইল এবং পাসওয়ার্ড দিন",
+    "email": "ই-মেইল",
+    "password": "পাসওয়ার্ড",
+    "signIn": "সাইন-ইন করুন"
 }

@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/app/app_configs.dart';
+import 'package:ecommerce_app/core/extensions/localization_extension.dart';
 import 'package:ecommerce_app/features/auth/ui/screens/sign_in_screen.dart';
 import 'package:ecommerce_app/features/auth/ui/widgets/app_logo.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
               Spacer(),
               CircularProgressIndicator(),
               const SizedBox(height: 16),
-              Text("${AppLocalizations.of(context)!.helloWorld}Version ${AppConfigs.currentVersion}"),
+              Text("${context.localization.version} ${AppConfigs.currentVersion}"),
             ],
           ),
         ),
