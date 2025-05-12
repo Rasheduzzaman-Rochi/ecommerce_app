@@ -1,8 +1,21 @@
 {
     "version": "Version",
-    "welcomeBack": "Welcome back",
-    "enterYourEmailAndPassword": "Enter your email and password",
+    "welcomeBack": "Welcome Back",
+    "enterYourEmailAndPassword": "Enter Your Email and Password",
     "email": "Email",
     "password": "Password",
-    "signIn": "Sign In"
+    "signIn": "Sign In",
+    "registerYourAccount": "Register Your Account",
+    "getStartedWithYourDetails": "Get started with your details",
+    "signUp": "Sign Up",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "phone": "Phone",
+    "deliveryAddress": "Delivery Address",
+    "enterYourOtpCode": "Enter Your OTP Code",
+    "aFourDigitCodeHasBeenSent": "A four-digit code has been sent to your email",
+    "verify": "Verify",
+    "thisCodeWillExpireIn": "This code will expire in ",
+    "oneTwoZeroS": "120s",
+    "resendCode": "Resend Code"
 }

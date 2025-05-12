@@ -1,9 +1,9 @@
 import 'package:ecommerce_app/app/app_colors.dart';
 import 'package:ecommerce_app/core/extensions/localization_extension.dart';
+import 'package:ecommerce_app/features/auth/ui/screens/sign_up_screen.dart';
 import 'package:ecommerce_app/features/auth/ui/widgets/app_logo.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -25,7 +25,7 @@ class _SignInScreenState extends State<SignInScreen> {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              const SizedBox(height: 60),
+              const SizedBox(height: 70),
               AppLogo(),
               SizedBox(height: 24),
               Text(
@@ -45,17 +45,39 @@ class _SignInScreenState extends State<SignInScreen> {
               ),
               const SizedBox(height: 8),
               TextFormField(
+                obscureText: true,
                 decoration: InputDecoration(
                   hintText: context.localization.password,
                 ),
               ),
               const SizedBox(height: 16),
               ElevatedButton(
-                onPressed: () {
-                  FirebaseCrashlytics.instance.log("Entered Sign in button");
-                  throw Exception("My custom error");
-                },
+                onPressed: () {},
                 child: Text(context.localization.signIn),
+              ),
+              const SizedBox(height: 24),
+              RichText(
+                text: TextSpan(
+                  text: "Don't have an account? ",
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  children: [
+                    TextSpan(
+                      text: context.localization.signUp,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.themeColor,
+                      ),
+                      recognizer:
+                          TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.pushNamed(context, SignUpScreen.name);
+                            },
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
