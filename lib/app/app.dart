@@ -50,6 +50,9 @@ class _CraftyBayState extends State<CraftyBay> {
             foregroundColor: Colors.white,
           ),
         ),
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.white
+        )
       ),
       localizationsDelegates: [
         AppLocalizations.delegate,
