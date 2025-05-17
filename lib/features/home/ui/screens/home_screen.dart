@@ -2,6 +2,7 @@ import 'package:ecommerce_app/app/assets_path.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import '../widgets/app_bar_action_button.dart';
+import '../widgets/category_item.dart';
 import '../widgets/home_carousel_slider.dart';
 import '../widgets/section_header.dart';
 
@@ -26,8 +27,25 @@ class _HomeScreenState extends State<HomeScreen> {
             HomeCarouselSlider(),
             const SizedBox(height: 16),
             SectionHeader(title: 'Categories', onTapSeeAll: () {}),
+            const SizedBox(height: 16),
+            _buildCategoriesSection(),
           ],
         ),
+      ),
+    );
+  }
+
+  SingleChildScrollView _buildCategoriesSection() {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: [
+          CategoryItem(),
+          CategoryItem(),
+          CategoryItem(),
+          CategoryItem(),
+          CategoryItem(),
+        ],
       ),
     );
   }
