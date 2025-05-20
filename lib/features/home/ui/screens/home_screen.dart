@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../auth/ui/screens/product_cart.dart';
 import '../widgets/app_bar_action_button.dart';
-import '../widgets/category_item.dart';
+import '../../../common/ui/widgets/category_item.dart';
 import '../widgets/home_carousel_slider.dart';
 import '../widgets/section_header.dart';
 

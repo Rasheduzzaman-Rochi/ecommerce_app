@@ -1,5 +1,5 @@
+import 'package:ecommerce_app/features/categories/ui/screens/category_list_screen.dart';
 import 'package:flutter/material.dart';
-
 import '../../../home/ui/screens/home_screen.dart';
 
 class MainBottomNavBarScreen extends StatefulWidget {
@@ -16,7 +16,7 @@ class _MainBottomNavBarScreenState extends State<MainBottomNavBarScreen> {
 
   final List<Widget> _screens = [
     const HomeScreen(),
-    const HomeScreen(),
+    const CategoryListScreen(),
     const HomeScreen(),
     const HomeScreen(),
   ];
@@ -29,8 +29,7 @@ class _MainBottomNavBarScreenState extends State<MainBottomNavBarScreen> {
         selectedIndex: _selectedIndex,
         onDestinationSelected: (int index) {
           _selectedIndex = index;
-          setState(() {
-          });
+          setState(() {});
         },
         destinations: [
           NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
