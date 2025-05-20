@@ -1,6 +1,7 @@
 import 'package:ecommerce_app/app/assets_path.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import '../../../auth/ui/screens/product_cart.dart';
 import '../widgets/app_bar_action_button.dart';
 import '../widgets/category_item.dart';
 import '../widgets/home_carousel_slider.dart';
@@ -18,24 +19,52 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            _buildSearchTextField(),
-            const SizedBox(height: 16),
-            HomeCarouselSlider(),
-            const SizedBox(height: 16),
-            SectionHeader(title: 'Categories', onTapSeeAll: () {}),
-            const SizedBox(height: 16),
-            _buildCategoriesSection(),
-          ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              _buildSearchTextField(),
+              const SizedBox(height: 16),
+              HomeCarouselSlider(),
+              const SizedBox(height: 16),
+              SectionHeader(title: 'Categories', onTapSeeAll: () {}),
+              const SizedBox(height: 16),
+              _buildCategoriesSection(),
+              const SizedBox(height: 16),
+              SectionHeader(title: 'Popular', onTapSeeAll: () {}),
+              const SizedBox(height: 16),
+              _buildProductSection(),
+              const SizedBox(height: 32),
+              SectionHeader(title: 'Special', onTapSeeAll: () {}),
+              const SizedBox(height: 16),
+              _buildProductSection(),
+              const SizedBox(height: 32),
+              SectionHeader(title: 'New', onTapSeeAll: () {}),
+              const SizedBox(height: 16),
+              _buildProductSection(),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  SingleChildScrollView _buildCategoriesSection() {
+  Widget _buildProductSection() {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: [
+          productCart(),
+          productCart(),
+          productCart(),
+          productCart(),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCategoriesSection() {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
