@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import '../../../../app/app_colors.dart';
 import '../../../../app/assets_path.dart';
 
-class productCart extends StatelessWidget {
-  const productCart({
+class ProductCard extends StatelessWidget {
+  const ProductCard({
     super.key,
   });
 

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import '../../../auth/ui/screens/product_cart.dart';
+import '../../../common/ui/widgets/product_cart.dart';
 import '../../../common/controllers/main_bottom_nav_bar_controller.dart';
 import '../widgets/app_bar_action_button.dart';
 import '../../../common/ui/widgets/category_item.dart';
@@ -31,9 +31,13 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 16),
               HomeCarouselSlider(),
               const SizedBox(height: 16),
-              SectionHeader(title: 'Categories', onTapSeeAll: () {
-                Get.find<MainBottomNavBarController>().moveToCategory(); // Change to category index
-              }),
+              SectionHeader(
+                title: 'Categories',
+                onTapSeeAll: () {
+                  Get.find<MainBottomNavBarController>()
+                      .moveToCategory(); // Change to category index
+                },
+              ),
               const SizedBox(height: 16),
               _buildCategoriesSection(),
               const SizedBox(height: 16),
@@ -59,12 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
-        children: [
-          productCart(),
-          productCart(),
-          productCart(),
-          productCart(),
-        ],
+        children: [ProductCard(), ProductCard(), ProductCard(), ProductCard()],
       ),
     );
   }
