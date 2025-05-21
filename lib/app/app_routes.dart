@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../features/auth/ui/screens/sign_in_screen.dart';
 import '../features/auth/ui/screens/verify_OTP_screen.dart';
 import '../features/common/ui/Screens/main_bottom_nav_bar_screen.dart';
+import '../features/products/ui/screens/product_details_screen.dart';
 
 class AppRoutes {
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
@@ -22,6 +23,8 @@ class AppRoutes {
     } else if (settings.name == ProductListScreen.name) {
       final String category = settings.arguments as String;
       route = ProductListScreen(category: category);
+    } else if (settings.name == ProductDetailsScreen.name) {
+      route = const ProductDetailsScreen();
     } else {
       route = const SplashScreen();
     }
