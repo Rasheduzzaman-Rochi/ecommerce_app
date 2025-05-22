@@ -14,7 +14,7 @@ class _ProductImageCarouselSliderState extends State<ProductImageCarouselSlider>
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Stack(
       children: [
         CarouselSlider(
           options: CarouselOptions(
@@ -31,11 +31,7 @@ class _ProductImageCarouselSliderState extends State<ProductImageCarouselSlider>
                   builder: (BuildContext context) {
                     return Container(
                       width: MediaQuery.of(context).size.width,
-                      margin: EdgeInsets.symmetric(horizontal: 2.0),
-                      decoration: BoxDecoration(
-                        color: AppColors.themeColor,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
+                      color: Colors.grey,
                       child: Center(
                         child: Text(
                           'text $i',
@@ -47,24 +43,28 @@ class _ProductImageCarouselSliderState extends State<ProductImageCarouselSlider>
                 );
               }).toList(),
         ),
-        const SizedBox(height: 12),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            for (int i = 0; i < 5; i++)
-              Container(
-                margin: EdgeInsets.only(left: 4),
-                width: 16,
-                height: 16,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: Colors.grey),
-                  color: _selectedSlider == i
-                      ? AppColors.themeColor
-                      : Colors.white,
-                ),
-              )
-          ],
+        Positioned(
+          bottom: 8,
+          left: 0,
+          right: 0,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              for (int i = 0; i < 5; i++)
+                Container(
+                  margin: EdgeInsets.only(left: 4),
+                  width: 16,
+                  height: 16,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(color: Colors.grey),
+                    color: _selectedSlider == i
+                        ? AppColors.themeColor
+                        : Colors.white,
+                  ),
+                )
+            ],
+          ),
         ),
       ],
     );
