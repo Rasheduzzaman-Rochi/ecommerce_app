@@ -1,6 +1,7 @@
 import 'package:ecommerce_app/features/auth/ui/screens/sign_up_screen.dart';
 import 'package:ecommerce_app/features/auth/ui/screens/splash_screen.dart';
 import 'package:ecommerce_app/features/products/ui/screens/product_list_screen.dart';
+import 'package:ecommerce_app/features/products/ui/screens/product_review_screen.dart';
 import 'package:flutter/material.dart';
 import '../features/auth/ui/screens/sign_in_screen.dart';
 import '../features/auth/ui/screens/verify_OTP_screen.dart';
@@ -25,6 +26,8 @@ class AppRoutes {
       route = ProductListScreen(category: category);
     } else if (settings.name == ProductDetailsScreen.name) {
       route = const ProductDetailsScreen();
+    } else if (settings.name == ProductReviewScreen.name) {
+      route = const ProductReviewScreen();
     } else {
       route = const SplashScreen();
     }

@@ -4,14 +4,12 @@ import '../../../../app/assets_path.dart';
 import '../../../products/ui/screens/product_details_screen.dart';
 
 class ProductCard extends StatelessWidget {
-  const ProductCard({
-    super.key,
-  });
+  const ProductCard({super.key});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         Navigator.pushNamed(context, ProductDetailsScreen.name);
       },
       child: Card(
@@ -57,7 +55,8 @@ class ProductCard extends StatelessWidget {
                         ),
                         Wrap(
                           children: [
-                            Icon(Icons.star,size: 20,color: Colors.orange,),Text('3.3')
+                            Icon(Icons.star, size: 20, color: Colors.amber),
+                            Text('3.3'),
                           ],
                         ),
                         Card(
@@ -73,9 +72,9 @@ class ProductCard extends StatelessWidget {
                               size: 14,
                             ),
                           ),
-                        )
+                        ),
                       ],
-                    )
+                    ),
                   ],
                 ),
               ),
