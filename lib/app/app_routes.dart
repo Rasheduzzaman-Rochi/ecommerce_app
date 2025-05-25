@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import '../features/auth/ui/screens/sign_in_screen.dart';
 import '../features/auth/ui/screens/verify_OTP_screen.dart';
 import '../features/common/ui/Screens/main_bottom_nav_bar_screen.dart';
+import '../features/products/ui/screens/create_review_screen.dart';
 import '../features/products/ui/screens/product_details_screen.dart';
 
 class AppRoutes {
@@ -28,6 +29,8 @@ class AppRoutes {
       route = const ProductDetailsScreen();
     } else if (settings.name == ProductReviewScreen.name) {
       route = const ProductReviewScreen();
+    } else if (settings.name == CreateReviewScreen.name) {
+      route = const CreateReviewScreen();
     } else {
       route = const SplashScreen();
     }

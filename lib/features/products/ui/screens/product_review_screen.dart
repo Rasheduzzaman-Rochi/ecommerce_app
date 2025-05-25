@@ -1,4 +1,4 @@
-import 'package:ecommerce_app/features/products/ui/screens/product_details_screen.dart';
+import 'package:ecommerce_app/features/products/ui/screens/create_review_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../app/app_colors.dart';
@@ -17,7 +17,7 @@ class _ProductReviewScreenState extends State<ProductReviewScreen> {
     return {
       'name': 'Rabbil Hasan',
       'review':
-      'Reference site about Lorem Ipsum, giving information on its origins, as well as a random Ipsum generator Reference site about Lorem Ipsum, giving information on its origins, as well as a random Ipsum generator',
+          'Reference site about Lorem Ipsum, giving information on its origins, as well as a random Ipsum generator Reference site about Lorem Ipsum, giving information on its origins, as well as a random Ipsum generator',
     };
   });
 
@@ -37,7 +37,7 @@ class _ProductReviewScreenState extends State<ProductReviewScreen> {
           shadowColor: Colors.black38,
           leading: IconButton(
             onPressed: () {
-              Get.back(); // অ্যাপবারের back বাটনে back
+              Get.back();
             },
             icon: const Icon(Icons.arrow_back_ios),
           ),
@@ -46,12 +46,14 @@ class _ProductReviewScreenState extends State<ProductReviewScreen> {
           children: [
             Expanded(
               child: Padding(
-                padding:
-                const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 10,
+                ),
                 child: ListView.separated(
                   itemCount: reviews.length,
-                  separatorBuilder: (context, index) =>
-                  const SizedBox(height: 8),
+                  separatorBuilder:
+                      (context, index) => const SizedBox(height: 8),
                   itemBuilder: (context, index) {
                     final review = reviews[index];
                     return Card(
@@ -102,7 +104,6 @@ class _ProductReviewScreenState extends State<ProductReviewScreen> {
               ),
             ),
 
-            // নিচের অংশ: রিভিউ কাউন্ট ও অ্যাড বাটন
             _buildReviewsSection(),
           ],
         ),
@@ -142,7 +143,7 @@ class _ProductReviewScreenState extends State<ProductReviewScreen> {
                 ),
               ),
               onPressed: () {
-                // Add your add-review functionality here
+                Get.toNamed(CreateReviewScreen.name);
               },
               child: const Icon(Icons.add, size: 24),
             ),
