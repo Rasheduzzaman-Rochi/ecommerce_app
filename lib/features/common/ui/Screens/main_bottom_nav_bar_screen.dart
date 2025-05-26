@@ -1,6 +1,7 @@
 import 'package:ecommerce_app/features/categories/ui/screens/category_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../cart/ui/screens/cart_screen.dart';
 import '../../../home/ui/screens/home_screen.dart';
 import '../../../wishlist/ui/screens/wish_list_screen.dart';
 import '../../controllers/main_bottom_nav_bar_controller.dart';
@@ -18,7 +19,7 @@ class _MainBottomNavBarScreenState extends State<MainBottomNavBarScreen> {
   final List<Widget> _screens = [
     const HomeScreen(),
     const CategoryListScreen(),
-    const HomeScreen(),
+    const CartScreen(),
     const WishListScreen(),
   ];
 
