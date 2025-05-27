@@ -28,9 +28,9 @@ class NetworkCaller {
 
       Response response = await get(uri, headers: headers);
       _logResponse(url, response);
+      final decodeResponse = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
-        final decodeResponse = jsonDecode(response.body);
         return NetworkResponse(
           statusCode: response.statusCode,
           responseData: decodeResponse,
@@ -40,11 +40,13 @@ class NetworkCaller {
         return NetworkResponse(
           isSuccess: false,
           statusCode: response.statusCode,
+          errorMessage: decodeResponse['msg'],
         );
       } else {
         return NetworkResponse(
           isSuccess: false,
           statusCode: response.statusCode,
+          errorMessage: decodeResponse['msg'],
         );
       }
     } catch (e) {
@@ -73,9 +75,9 @@ class NetworkCaller {
         body: jsonEncode(body),
       );
       _logResponse(url, response);
+      final decodeResponse = jsonDecode(response.body);
 
-      if (response.statusCode == 200) {
-        final decodeResponse = jsonDecode(response.body);
+      if (response.statusCode == 200 || response.statusCode == 201) {
         return NetworkResponse(
           statusCode: response.statusCode,
           responseData: decodeResponse,
@@ -85,11 +87,13 @@ class NetworkCaller {
         return NetworkResponse(
           isSuccess: false,
           statusCode: response.statusCode,
+          errorMessage: decodeResponse['msg'],
         );
       } else {
         return NetworkResponse(
           isSuccess: false,
           statusCode: response.statusCode,
+          errorMessage: decodeResponse['msg'],
         );
       }
     } catch (e) {
