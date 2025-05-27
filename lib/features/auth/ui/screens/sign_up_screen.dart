@@ -209,7 +209,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       if (isSuccess) {
         Navigator.pushNamed(context, VerifyOTPScreen.name);
       } else {
-        showSnackBarMessage(context, signUpController.errorMessage!);
+        showSnackBarMessage(context, signUpController.errorMessage!, true);
       }
     }
   }
