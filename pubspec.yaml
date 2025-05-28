@@ -23,6 +23,7 @@ dependencies:
   get: ^4.7.2
   logger: ^2.5.0
   email_validator: ^3.0.0
+  flutter_dotenv: ^5.2.1
 
 dev_dependencies:
   flutter_test:
