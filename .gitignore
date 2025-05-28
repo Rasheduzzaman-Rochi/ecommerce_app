@@ -44,4 +44,5 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
+# .env file - For storing sensitive information like API keys
 .env
