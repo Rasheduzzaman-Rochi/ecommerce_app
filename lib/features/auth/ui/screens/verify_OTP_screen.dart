@@ -1,11 +1,19 @@
 import 'package:ecommerce_app/app/app_colors.dart';
 import 'package:ecommerce_app/core/extensions/localization_extension.dart';
+import 'package:ecommerce_app/core/widgets/show_snack_bar_message.dart';
+import 'package:ecommerce_app/features/auth/data/models/verify_otp_model.dart';
+import 'package:ecommerce_app/features/auth/ui/screens/sign_in_screen.dart';
 import 'package:ecommerce_app/features/auth/ui/widgets/app_logo.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
+import '../controllers/verify_otp_controller.dart';
+
 class VerifyOTPScreen extends StatefulWidget {
-  const VerifyOTPScreen({super.key});
+  const VerifyOTPScreen({super.key, required this.email});
+
+  final String email;
 
   static const String name = '/verify-OTP';
 
@@ -15,6 +23,7 @@ class VerifyOTPScreen extends StatefulWidget {
 
 class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
   final TextEditingController _otpTEController = TextEditingController();
+  final VerifyOtpController _verifyOtpController = Get.find<VerifyOtpController>();
 
   @override
   Widget build(BuildContext context) {
@@ -109,5 +118,21 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
         ),
       ],
     );
+  }
+
+  Future<void> _verifyOtp() async {
+    VerifyOtpModel verifyOtpModel = VerifyOtpModel(
+      email: widget.email,
+      otp: _otpTEController.text,
+    );
+    final bool isSuccess = await _verifyOtpController.verifyOtp(
+      verifyOtpModel,
+    );
+    if(isSuccess){
+      showSnackBarMessage(context, ("Otp verified successfully"));
+      Navigator.pushNamedAndRemoveUntil(context, SignInScreen.name, (predicate) => false);
+    }else {
+      showSnackBarMessage(context, _verifyOtpController.errorMessage!, true);
+    }
   }
 }
