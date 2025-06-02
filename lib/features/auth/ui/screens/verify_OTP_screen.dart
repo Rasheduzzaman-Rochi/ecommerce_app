@@ -23,7 +23,9 @@ class VerifyOTPScreen extends StatefulWidget {
 
 class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
   final TextEditingController _otpTEController = TextEditingController();
-  final VerifyOtpController _verifyOtpController = Get.find<VerifyOtpController>();
+  final VerifyOtpController _verifyOtpController =
+      Get.find<VerifyOtpController>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -40,84 +42,98 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
   }
 
   Widget _buildForm(TextTheme textTheme) {
-    return Column(
-      children: [
-        const SizedBox(height: 70),
-        const AppLogo(),
-        const SizedBox(height: 24),
-        Text(
-          context.localization.enterYourOtpCode,
-          style: textTheme.titleLarge,
-        ),
-        const SizedBox(height: 8),
-        Text(
-          context.localization.aFourDigitCodeHasBeenSent,
-          style: const TextStyle(color: Colors.grey, fontSize: 16),
-        ),
-        const SizedBox(height: 24),
-        PinCodeTextField(
-          length: 4,
-          obscureText: false,
-          animationType: AnimationType.fade,
-          keyboardType: TextInputType.number,
-          pinTheme: PinTheme(
-            shape: PinCodeFieldShape.box,
-            borderRadius: BorderRadius.circular(8),
-            fieldHeight: 56,
-            fieldWidth: 52,
-            activeColor: AppColors.themeColor,
-            activeFillColor: Colors.white,
-            inactiveFillColor: Colors.white,
-            selectedFillColor: Colors.white,
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: [
+          const SizedBox(height: 70),
+          const AppLogo(),
+          const SizedBox(height: 24),
+          Text(
+            context.localization.enterYourOtpCode,
+            style: textTheme.titleLarge,
           ),
-          animationDuration: const Duration(milliseconds: 300),
-          backgroundColor: Colors.transparent,
-          enableActiveFill: true,
-          controller: _otpTEController,
-          appContext: context,
-          //This makes the boxes close but slightly spaced
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        ),
-        const SizedBox(height: 20),
-        ElevatedButton(
-          onPressed: () {},
-          child: Text(context.localization.verify),
-        ),
-        const SizedBox(height: 30),
-        Column(
-          children: [
-            RichText(
-              text: TextSpan(
-                text: context.localization.thisCodeWillExpireIn,
-                style: const TextStyle(
-                  color: Colors.grey,
-                  fontWeight: FontWeight.w600,
-                ),
-                children: [
-                  TextSpan(
-                    text: context.localization.oneTwoZeroS,
-                    style: const TextStyle(
-                      color: Colors.blue,
-                      fontWeight: FontWeight.w600,
-                    ),
+          const SizedBox(height: 8),
+          Text(
+            context.localization.aFourDigitCodeHasBeenSent,
+            style: const TextStyle(color: Colors.grey, fontSize: 16),
+          ),
+          const SizedBox(height: 24),
+          PinCodeTextField(
+            length: 4,
+            obscureText: false,
+            animationType: AnimationType.fade,
+            keyboardType: TextInputType.number,
+            pinTheme: PinTheme(
+              shape: PinCodeFieldShape.box,
+              borderRadius: BorderRadius.circular(8),
+              fieldHeight: 56,
+              fieldWidth: 52,
+              activeColor: AppColors.themeColor,
+              activeFillColor: Colors.white,
+              inactiveFillColor: Colors.white,
+              selectedFillColor: Colors.white,
+            ),
+            animationDuration: const Duration(milliseconds: 300),
+            backgroundColor: Colors.transparent,
+            enableActiveFill: true,
+            controller: _otpTEController,
+            appContext: context,
+            validator: (String? value) {
+              if ((value?.length ?? 0) < 4) {
+                return 'Enter your OTP';
+              }
+              return null;
+            },
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          ),
+          const SizedBox(height: 20),
+          ElevatedButton(
+            onPressed: _onTapVerifyOtpButton,
+            child: Text(context.localization.verify),
+          ),
+          const SizedBox(height: 30),
+          Column(
+            children: [
+              RichText(
+                text: TextSpan(
+                  text: context.localization.thisCodeWillExpireIn,
+                  style: const TextStyle(
+                    color: Colors.grey,
+                    fontWeight: FontWeight.w600,
                   ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 8),
-            RichText(
-              text: TextSpan(
-                text: context.localization.resendCode,
-                style: const TextStyle(
-                  color: Colors.grey,
-                  fontWeight: FontWeight.w600,
+                  children: [
+                    TextSpan(
+                      text: context.localization.oneTwoZeroS,
+                      style: const TextStyle(
+                        color: Colors.blue,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ),
-          ],
-        ),
-      ],
+              const SizedBox(height: 8),
+              RichText(
+                text: TextSpan(
+                  text: context.localization.resendCode,
+                  style: const TextStyle(
+                    color: Colors.grey,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
+  }
+
+  void _onTapVerifyOtpButton() {
+    if (_formKey.currentState!.validate()) {
+      _verifyOtp();
+    }
   }
 
   Future<void> _verifyOtp() async {
@@ -125,13 +141,15 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
       email: widget.email,
       otp: _otpTEController.text,
     );
-    final bool isSuccess = await _verifyOtpController.verifyOtp(
-      verifyOtpModel,
-    );
-    if(isSuccess){
+    final bool isSuccess = await _verifyOtpController.verifyOtp(verifyOtpModel);
+    if (isSuccess) {
       showSnackBarMessage(context, ("Otp verified successfully"));
-      Navigator.pushNamedAndRemoveUntil(context, SignInScreen.name, (predicate) => false);
-    }else {
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        SignInScreen.name,
+        (predicate) => false,
+      );
+    } else {
       showSnackBarMessage(context, _verifyOtpController.errorMessage!, true);
     }
   }

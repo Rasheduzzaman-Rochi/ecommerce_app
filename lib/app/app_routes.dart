@@ -19,7 +19,8 @@ class AppRoutes {
     } else if (settings.name == SignUpScreen.name) {
       route = const SignUpScreen();
     } else if (settings.name == VerifyOTPScreen.name) {
-      route = const VerifyOTPScreen(email: '');
+      String email = settings.arguments as String;
+      route =  VerifyOTPScreen(email: email);
     } else if (settings.name == MainBottomNavBarScreen.name) {
       route = const MainBottomNavBarScreen();
     } else if (settings.name == ProductListScreen.name) {
