@@ -111,7 +111,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   validator: (String? value) {
                     String phoneNumber = value ?? '';
-                    RegExp regExp = RegExp(r'^(?:+88|88)?01[3-9]\d{8}$');
+                    RegExp regExp = RegExp(r'^(?:\+880|880|0)1[3-9]\d{8}$');
                     if (regExp.hasMatch(phoneNumber) == false) {
                       return 'Enter a valid phone number';
                     }
@@ -225,4 +225,3 @@ class _SignUpScreenState extends State<SignUpScreen> {
     super.dispose();
   }
 }
-

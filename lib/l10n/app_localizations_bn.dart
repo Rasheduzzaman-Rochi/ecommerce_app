@@ -57,11 +57,5 @@ class AppLocalizationsBn extends AppLocalizations {
   String get verify => 'যাচাই';
 
   @override
-  String get thisCodeWillExpireIn => 'এই কোডের মেয়াদ শেষ হবে';
-
-  @override
-  String get oneTwoZeroS => '১২০ সেকেন্ড';
-
-  @override
   String get resendCode => 'কোড পুনরায় পাঠান';
 }

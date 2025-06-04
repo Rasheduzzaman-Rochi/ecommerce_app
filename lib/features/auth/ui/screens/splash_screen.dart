@@ -1,9 +1,10 @@
 import 'package:ecommerce_app/app/app_configs.dart';
 import 'package:ecommerce_app/core/extensions/localization_extension.dart';
+import 'package:ecommerce_app/features/auth/ui/screens/sign_in_screen.dart';
 import 'package:ecommerce_app/features/auth/ui/screens/sign_up_screen.dart';
+import 'package:ecommerce_app/features/auth/ui/screens/verify_OTP_screen.dart';
 import 'package:ecommerce_app/features/auth/ui/widgets/app_logo.dart';
 import 'package:flutter/material.dart';
-import '../../../common/ui/Screens/main_bottom_nav_bar_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

@@ -191,18 +191,6 @@ abstract class AppLocalizations {
   /// **'Verify'**
   String get verify;
 
-  /// No description provided for @thisCodeWillExpireIn.
-  ///
-  /// In en, this message translates to:
-  /// **'This code will expire in '**
-  String get thisCodeWillExpireIn;
-
-  /// No description provided for @oneTwoZeroS.
-  ///
-  /// In en, this message translates to:
-  /// **'120s'**
-  String get oneTwoZeroS;
-
   /// No description provided for @resendCode.
   ///
   /// In en, this message translates to:

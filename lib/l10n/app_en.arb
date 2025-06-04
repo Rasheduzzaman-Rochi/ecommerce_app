@@ -15,7 +15,5 @@
     "enterYourOtpCode": "Enter Your OTP Code",
     "aFourDigitCodeHasBeenSent": "A four-digit code has been sent to your email",
     "verify": "Verify",
-    "thisCodeWillExpireIn": "This code will expire in ",
-    "oneTwoZeroS": "120s",
     "resendCode": "Resend Code"
 }

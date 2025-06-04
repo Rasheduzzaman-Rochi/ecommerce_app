@@ -57,11 +57,5 @@ class AppLocalizationsEn extends AppLocalizations {
   String get verify => 'Verify';
 
   @override
-  String get thisCodeWillExpireIn => 'This code will expire in ';
-
-  @override
-  String get oneTwoZeroS => '120s';
-
-  @override
   String get resendCode => 'Resend Code';
 }

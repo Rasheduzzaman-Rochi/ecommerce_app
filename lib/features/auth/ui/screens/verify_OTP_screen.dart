@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:ecommerce_app/app/app_colors.dart';
 import 'package:ecommerce_app/core/extensions/localization_extension.dart';
 import 'package:ecommerce_app/core/widgets/show_snack_bar_message.dart';
@@ -7,7 +8,6 @@ import 'package:ecommerce_app/features/auth/ui/widgets/app_logo.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-
 import '../controllers/verify_otp_controller.dart';
 
 class VerifyOTPScreen extends StatefulWidget {
@@ -26,6 +26,25 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
   final VerifyOtpController _verifyOtpController =
       Get.find<VerifyOtpController>();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  late RxInt _currentTimer;
+
+  void _startTimer() {
+    _currentTimer.value = 30;
+    Timer.periodic(const Duration(seconds: 30), (timer) {
+      if (_currentTimer.value == 0) {
+        timer.cancel();
+      } else {
+        _currentTimer.value--;
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _startTimer();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -93,38 +112,41 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
             child: Text(context.localization.verify),
           ),
           const SizedBox(height: 30),
-          Column(
-            children: [
-              RichText(
-                text: TextSpan(
-                  text: context.localization.thisCodeWillExpireIn,
-                  style: const TextStyle(
-                    color: Colors.grey,
-                    fontWeight: FontWeight.w600,
-                  ),
-                  children: [
-                    TextSpan(
-                      text: context.localization.oneTwoZeroS,
+          Obx(() {
+            return Column(
+              children: [
+                Visibility(
+                  visible: _currentTimer.value == 0,
+                  child: TextButton(
+                    onPressed: () {
+                      //Resend OTP with API call by OTP controller
+                      _startTimer();
+                    },
+                    child: Text(
+                      context.localization.resendCode,
                       style: const TextStyle(
-                        color: Colors.blue,
+                        color: Colors.grey,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 8),
-              RichText(
-                text: TextSpan(
-                  text: context.localization.resendCode,
-                  style: const TextStyle(
-                    color: Colors.grey,
-                    fontWeight: FontWeight.w600,
                   ),
                 ),
-              ),
-            ],
-          ),
+                Visibility(
+                  visible: _currentTimer.value != 0,
+                  child: TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      'Resend OTP in ${_currentTimer.value}',
+                      style: const TextStyle(
+                        color: Colors.grey,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            );
+          }),
         ],
       ),
     );

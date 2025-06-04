@@ -15,7 +15,5 @@
     "enterYourOtpCode": "আপনার ওটিপি কোড লিখুন",
     "aFourDigitCodeHasBeenSent": "আপনার ইমেলে একটি চার-সংখ্যার কোড পাঠানো হয়েছে",
     "verify": "যাচাই",
-    "thisCodeWillExpireIn": "এই কোডের মেয়াদ শেষ হবে",
-    "oneTwoZeroS": "১২০ সেকেন্ড",
     "resendCode": "কোড পুনরায় পাঠান"
 }
