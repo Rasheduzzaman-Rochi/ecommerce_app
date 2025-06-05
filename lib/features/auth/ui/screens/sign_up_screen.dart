@@ -122,6 +122,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 TextFormField(
                   controller: _passwordTEController,
                   textInputAction: TextInputAction.next,
+                  obscureText: true,
                   decoration: InputDecoration(
                     hintText: context.localization.password,
                   ),
@@ -206,8 +207,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
         deliveryAddress: _deliveryAdTEController.text.trim(),
       );
       final bool isSuccess = await signUpController.signUp(signUpModel);
+      if (!mounted) return;
       if (isSuccess) {
-        Navigator.pushNamed(context, VerifyOTPScreen.name);
+        Navigator.pushNamed(context,VerifyOTPScreen.name);
       } else {
         showSnackBarMessage(context, signUpController.errorMessage!, true);
       }
