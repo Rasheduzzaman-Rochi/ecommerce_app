@@ -131,10 +131,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
   Future<void> _onTapSignInButton() async {
     if (_formKey.currentState!.validate()) {
-      SignInRequestModel signInRequestModel = SignInRequestModel(
-        email: _emailTEController.text.trim(),
-        password: _passwordTEController.text,
-      );
+      SignInRequestModel signInRequestModel = _buildSignInRequestModel();
       final bool isSuccess = await _signInController.signIn(signInRequestModel);
       if (!mounted) return;
       if (isSuccess) {
@@ -147,6 +144,13 @@ class _SignInScreenState extends State<SignInScreen> {
         showSnackBarMessage(context, _signInController.errorMessage!, true);
       }
     }
+  }
+
+  SignInRequestModel _buildSignInRequestModel() {
+    return SignInRequestModel(
+      email: _emailTEController.text.trim(),
+      password: _passwordTEController.text,
+    );
   }
 
   @override

@@ -196,16 +196,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
+
   Future<void> _onTapSignUpButton() async {
     if (_formKey.currentState!.validate()) {
-      SignUpModel signUpModel = SignUpModel(
-        email: _emailTEController.text.trim(),
-        firstName: _firstNameTEController.text.trim(),
-        lastName: _lastNameTEController.text.trim(),
-        phone: _phoneTEController.text.trim(),
-        password: _passwordTEController.text.trim(),
-        deliveryAddress: _deliveryAdTEController.text.trim(),
-      );
+      SignUpModel signUpModel = _buildSignUpMode();    // _buildSignUpMode() --> is method extraction
       final bool isSuccess = await signUpController.signUp(signUpModel);
       if (!mounted) return;
       if (isSuccess) {
@@ -214,6 +208,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
         showSnackBarMessage(context, signUpController.errorMessage!, true);
       }
     }
+  }
+
+  SignUpModel _buildSignUpMode() {
+    return SignUpModel(
+      email: _emailTEController.text.trim(),
+      firstName: _firstNameTEController.text.trim(),
+      lastName: _lastNameTEController.text.trim(),
+      phone: _phoneTEController.text.trim(),
+      password: _passwordTEController.text.trim(),
+      deliveryAddress: _deliveryAdTEController.text.trim(),
+    );
   }
 
   @override
