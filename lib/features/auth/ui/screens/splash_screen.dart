@@ -1,9 +1,7 @@
 import 'package:ecommerce_app/app/app_configs.dart';
 import 'package:ecommerce_app/core/extensions/localization_extension.dart';
-import 'package:ecommerce_app/features/auth/ui/screens/sign_in_screen.dart';
-import 'package:ecommerce_app/features/auth/ui/screens/sign_up_screen.dart';
-import 'package:ecommerce_app/features/auth/ui/screens/verify_OTP_screen.dart';
 import 'package:ecommerce_app/features/auth/ui/widgets/app_logo.dart';
+import 'package:ecommerce_app/features/common/ui/Screens/main_bottom_nav_bar_screen.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -25,7 +23,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> _navigateToNextScreen() async {
     await Future.delayed(const Duration(seconds: 3));
-    Navigator.pushReplacementNamed(context, SignUpScreen.name);
+    if(!mounted) return;
+    Navigator.pushReplacementNamed(context, MainBottomNavBarScreen.name);
   }
 
   @override
