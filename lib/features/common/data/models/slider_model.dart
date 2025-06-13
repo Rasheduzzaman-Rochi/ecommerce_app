@@ -1,11 +1,11 @@
-class SlideModel {
+class SliderModel {
   final String id;
   final String photoUrl;
   final String description;
   final String? brand;
   final String? category;
 
-  SlideModel({
+  SliderModel({
     required this.id,
     required this.photoUrl,
     required this.description,
@@ -13,8 +13,8 @@ class SlideModel {
     this.category,
   });
 
-  factory SlideModel.fromJson(Map<String, dynamic> json) {
-    return SlideModel(
+  factory SliderModel.fromJson(Map<String, dynamic> json) {
+    return SliderModel(
       id: json['_id'],
       photoUrl: json['photo_url'],
       description: json['description'],
