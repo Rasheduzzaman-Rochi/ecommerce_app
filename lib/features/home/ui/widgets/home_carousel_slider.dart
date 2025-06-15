@@ -35,62 +35,74 @@ class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
               ),
             ),
           ),
-          child: Column(
-            children: [
-              CarouselSlider(
-                options: CarouselOptions(
-                  height: 200.0,
-                  viewportFraction: 0.9,
-                  onPageChanged: (index, reason) {
-                    _selectedSlider = index;
-                    setState(() {});
-                  },
-                ),
-                items:
-                    SliderController.sliders.map((slider) {
-                      return Builder(
-                        builder: (BuildContext context) {
-                          return Container(
-                            width: MediaQuery.of(context).size.width,
-                            margin: const EdgeInsets.symmetric(horizontal: 2.0),
-                            decoration: BoxDecoration(
-                              color: AppColors.themeColor,
-                              borderRadius: BorderRadius.circular(8),
-                              image: DecorationImage(
-                                image: NetworkImage(slider.photoUrl),
-                                fit: BoxFit.cover,
+          child: Visibility(
+            visible: SliderController.sliders.isNotEmpty,
+            child: Column(
+              children: [
+                CarouselSlider(
+                  options: CarouselOptions(
+                    height: 200.0,
+                    viewportFraction: 0.9,
+                    autoPlay: true,
+                    onPageChanged: (index, reason) {
+                      _selectedSlider = index;
+                      setState(() {});
+                    },
+                  ),
+                  items:
+                      SliderController.sliders.map((slider) {
+                        return Builder(
+                          builder: (BuildContext context) {
+                            return Container(
+                              width: MediaQuery.of(context).size.width,
+                              margin: const EdgeInsets.symmetric(
+                                horizontal: 2.0,
                               ),
-                            ),
-                            child: Text(
-                              slider.description,
-                              style: const TextStyle(fontSize: 16.0),
-                            ),
-                          );
-                        },
-                      );
-                    }).toList(),
-              ),
-              const SizedBox(height: 12),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  for (int i = 0; i < SliderController.sliders.length; i++)
-                    Container(
-                      margin: const EdgeInsets.only(left: 4),
-                      width: 16,
-                      height: 16,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                        border: Border.all(color: Colors.grey),
-                        color:
-                            _selectedSlider == i
-                                ? AppColors.themeColor
-                                : Colors.white,
+                              decoration: BoxDecoration(
+                                color: AppColors.themeColor,
+                                borderRadius: BorderRadius.circular(8),
+                                image: DecorationImage(
+                                  image: NetworkImage(slider.photoUrl),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Text(
+                                  slider.description,
+                                  style: const TextStyle(
+                                    fontSize: 16.0,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                      }).toList(),
+                ),
+                const SizedBox(height: 12),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    for (int i = 0; i < SliderController.sliders.length; i++)
+                      Container(
+                        margin: const EdgeInsets.only(left: 4),
+                        width: 16,
+                        height: 16,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(color: Colors.grey),
+                          color:
+                              _selectedSlider == i
+                                  ? AppColors.themeColor
+                                  : Colors.white,
+                        ),
                       ),
-                    ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
         );
       },

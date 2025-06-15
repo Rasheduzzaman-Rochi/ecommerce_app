@@ -27,6 +27,9 @@ class _MainBottomNavBarScreenState extends State<MainBottomNavBarScreen> {
   @override
   void initState() {
     super.initState();
+    if (!Get.isRegistered<HomeSliderController>()) {
+      Get.put(HomeSliderController());
+    }
     Get.find<HomeSliderController>().getSliders();
   }
 
