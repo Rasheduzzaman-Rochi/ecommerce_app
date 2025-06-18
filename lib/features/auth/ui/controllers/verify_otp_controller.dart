@@ -1,5 +1,4 @@
 import 'package:ecommerce_app/core/network_caller/network_caller.dart';
-import 'package:ecommerce_app/features/auth/data/models/SignUpModel.dart';
 import 'package:ecommerce_app/features/auth/data/models/verify_otp_model.dart';
 import 'package:get/get.dart';
 import '../../../../app/app_urls.dart';
