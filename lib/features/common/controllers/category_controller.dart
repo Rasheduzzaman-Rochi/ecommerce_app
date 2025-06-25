@@ -1,6 +1,7 @@
 import 'package:ecommerce_app/app/app_urls.dart';
 import 'package:ecommerce_app/core/network_caller/network_caller.dart';
 import 'package:get/get.dart';
+import '../data/models/category_model.dart';
 
 class CategoryController extends GetxController {
   int _perPageDataCount = 10;
@@ -10,6 +11,10 @@ class CategoryController extends GetxController {
   int? _totalPages;
 
   bool _isInitialLoading = false;
+
+  List<CategoryModel> _categoryList = [];
+
+  String? _errorMessage;
 
   Future<void> getCategoryList() async {
     _currentPage++;
@@ -24,5 +29,15 @@ class CategoryController extends GetxController {
         'page': _currentPage,
       }
     );
+    if (response.isSuccess) {
+      List<CategoryModel> list = [];
+      for (Map<String, dynamic> data
+          in response.responseData?['data']['results']) {
+        list.add(CategoryModel.fromJson(data));
+      }
+      _categoryList.addAll(list);
+    } else {
+      _errorMessage = response.errorMessage;
+    }
   }
 }
