@@ -4,30 +4,42 @@ import 'package:get/get.dart';
 import '../data/models/category_model.dart';
 
 class CategoryController extends GetxController {
-  int _perPageDataCount = 10;
+  final int _perPageDataCount = 10;
 
   int _currentPage = 1;
 
   int? _totalPages;
 
-  bool _isInitialLoading = false;
+  bool _isInitialLoading = true;
+
+  bool _isLoading = false;
 
   List<CategoryModel> _categoryList = [];
 
   String? _errorMessage;
 
-  Future<void> getCategoryList() async {
+  String? get errorMessage => _errorMessage;
+
+  int? get totalPages => _totalPages;
+
+  List<CategoryModel> get categoryList => _categoryList;
+
+  bool get isInitialLoading => _isInitialLoading;
+
+  bool get isLoading => _isLoading;
+
+  Future<bool> getCategoryList() async {
+    bool isSuccess = false;
     _currentPage++;
-    if (_isInitialLoading = false) {
-      _isInitialLoading = true;
+    if (_isInitialLoading) {
+      _isInitialLoading = false;
+    } else {
+      _isLoading = true;
     }
     update();
     final NetworkResponse response = await Get.find<NetworkCaller>().getRequest(
       url: AppUrls.categoryListUrl,
-      queryParams: {
-        'count' : _perPageDataCount,
-        'page': _currentPage,
-      }
+      queryParams: {'count': _perPageDataCount, 'page': _currentPage},
     );
     if (response.isSuccess) {
       List<CategoryModel> list = [];
@@ -36,8 +48,24 @@ class CategoryController extends GetxController {
         list.add(CategoryModel.fromJson(data));
       }
       _categoryList.addAll(list);
+      _totalPages = response.responseData!['data']['last_page'];
+      _errorMessage = null;
+      isSuccess = true;
     } else {
       _errorMessage = response.errorMessage;
     }
+
+    if (!_isInitialLoading) {
+      _isLoading = false;
+    }
+    update();
+    return isSuccess;
+  }
+
+  Future<bool> initialLoad() {
+    _currentPage = 0;
+    _categoryList = [];
+    _isInitialLoading = true;
+    return getCategoryList();
   }
 }
