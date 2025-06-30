@@ -29,6 +29,10 @@ class CategoryController extends GetxController {
   bool get isLoading => _isLoading;
 
   Future<bool> getCategoryList() async {
+    if (_totalPages != null && _currentPage > _totalPages!) {
+      return true; // No more pages to load
+    }
+
     bool isSuccess = false;
     _currentPage++;
     if (!_isInitialLoading) {

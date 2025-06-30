@@ -24,7 +24,7 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
   }
 
   void _loadMoreData() {
-    if (_scrollController.position.extentBefore > 300) {
+    if (_scrollController.position.extentAfter > 300) {
       _categoryController.getCategoryList();
     }
   }
