@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import '../data/models/category_model.dart';
 
 class CategoryController extends GetxController {
-  final int _perPageDataCount = 10;
+  final int _perPageDataCount = 30;
 
   int _currentPage = 1;
 
@@ -31,9 +31,7 @@ class CategoryController extends GetxController {
   Future<bool> getCategoryList() async {
     bool isSuccess = false;
     _currentPage++;
-    if (_isInitialLoading) {
-      _isInitialLoading = false;
-    } else {
+    if (!_isInitialLoading) {
       _isLoading = true;
     }
     update();
@@ -57,12 +55,14 @@ class CategoryController extends GetxController {
 
     if (!_isInitialLoading) {
       _isLoading = false;
+    } else {
+      _isInitialLoading = false;
     }
     update();
     return isSuccess;
   }
 
-  Future<bool> initialLoad() {
+  Future<bool> refreshList() {
     _currentPage = 0;
     _categoryList = [];
     _isInitialLoading = true;
