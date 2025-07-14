@@ -1,4 +1,7 @@
 import 'package:ecommerce_app/app/assets_path.dart';
+import 'package:ecommerce_app/features/common/controllers/category_controller.dart';
+import 'package:ecommerce_app/features/common/data/models/category_model.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -69,17 +72,27 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildCategoriesSection() {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: [
-          CategoryItem(),
-          CategoryItem(),
-          CategoryItem(),
-          CategoryItem(),
-          CategoryItem(),
-        ],
-      ),
+    return GetBuilder<CategoryController>(
+      builder: (controller) {
+        if (controller.isInitialLoading) {
+          return SizedBox(height: 100, child: CircularProgressIndicator());
+        }
+
+        List<CategoryModel> list =
+            controller.categoryList.length > 10
+                ? controller.categoryList.sublist(0, 10)
+                : controller.categoryList;
+
+        return SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children:
+                list.map((e) {
+                  return CategoryItem(categoryModel: e);
+                }).toList(),
+          ),
+        );
+      },
     );
   }
 

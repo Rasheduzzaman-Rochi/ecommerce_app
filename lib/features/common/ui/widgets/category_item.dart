@@ -1,9 +1,11 @@
+import 'package:ecommerce_app/features/common/data/models/category_model.dart';
 import 'package:ecommerce_app/features/products/ui/screens/product_list_screen.dart';
 import 'package:flutter/material.dart';
 import '../../../../app/app_colors.dart';
 
 class CategoryItem extends StatelessWidget {
-  const CategoryItem({super.key});
+  const CategoryItem({super.key, required this.categoryModel});
+  final CategoryModel categoryModel;
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +14,7 @@ class CategoryItem extends StatelessWidget {
         Navigator.pushNamed(
           context,
           ProductListScreen.name,
-          arguments: "Electronics",
+          arguments: categoryModel.title,
         );
       },
       child: Column(
@@ -23,15 +25,11 @@ class CategoryItem extends StatelessWidget {
             color: AppColors.themeColor.withOpacity(0.15),
             child: Padding(
               padding: EdgeInsets.all(16),
-              child: Icon(
-                Icons.computer,
-                size: 48,
-                color: AppColors.themeColor,
-              ),
+              child: Image.network(categoryModel.icon, height: 48, width: 48),
             ),
           ),
           Text(
-            "Electronics",
+            categoryModel.title,
             style: TextStyle(
               color: AppColors.themeColor,
               fontWeight: FontWeight.w500,

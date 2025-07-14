@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import '../../../cart/ui/screens/cart_screen.dart';
 import '../../../home/ui/screens/home_screen.dart';
 import '../../../wishlist/ui/screens/wish_list_screen.dart';
+import '../../controllers/category_controller.dart';
 import '../../controllers/main_bottom_nav_bar_controller.dart';
 
 class MainBottomNavBarScreen extends StatefulWidget {
@@ -31,6 +32,7 @@ class _MainBottomNavBarScreenState extends State<MainBottomNavBarScreen> {
       Get.put(HomeSliderController());
     }
     Get.find<HomeSliderController>().getSliders();
+    Get.find<CategoryController>().getCategoryList();
   }
 
   @override

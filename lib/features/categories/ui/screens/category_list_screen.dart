@@ -2,7 +2,6 @@ import 'package:ecommerce_app/features/common/controllers/category_controller.da
 import 'package:ecommerce_app/features/common/ui/widgets/category_item.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import '../../../common/controllers/main_bottom_nav_bar_controller.dart';
 
 class CategoryListScreen extends StatefulWidget {
@@ -65,7 +64,11 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
                         mainAxisSpacing: 16,
                       ),
                       itemBuilder: (context, index) {
-                        return FittedBox(child: CategoryItem());
+                        return FittedBox(
+                          child: CategoryItem(
+                            categoryModel: controller.categoryList[index],
+                          ),
+                        );
                       },
                     ),
                   ),
