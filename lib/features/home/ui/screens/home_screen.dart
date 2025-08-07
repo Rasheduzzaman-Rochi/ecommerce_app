@@ -75,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return GetBuilder<CategoryController>(
       builder: (controller) {
         if (controller.isInitialLoading) {
-          return SizedBox(height: 100, child: CircularProgressIndicator());
+          return SizedBox(height: 38, child: CircularProgressIndicator());
         }
 
         List<CategoryModel> list =
