@@ -1,11 +1,9 @@
 import 'package:ecommerce_app/app/assets_path.dart';
 import 'package:ecommerce_app/features/common/controllers/category_controller.dart';
 import 'package:ecommerce_app/features/common/data/models/category_model.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import '../../../common/ui/widgets/product_cart.dart';
 import '../../../common/controllers/main_bottom_nav_bar_controller.dart';
 import '../widgets/app_bar_action_button.dart';
