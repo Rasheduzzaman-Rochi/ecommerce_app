@@ -5,4 +5,5 @@ class AppUrls{
   static const String signInUrl = "$_baseUrl/auth/login";
   static const String slidersUrl = "$_baseUrl/slides";
   static const String categoryListUrl = "$_baseUrl/categories";
+  static const String productListUrl = "$_baseUrl/products";
 }

@@ -5,6 +5,7 @@ import 'package:ecommerce_app/features/products/ui/screens/product_review_screen
 import 'package:flutter/material.dart';
 import '../features/auth/ui/screens/sign_in_screen.dart';
 import '../features/auth/ui/screens/verify_OTP_screen.dart';
+import '../features/common/data/models/category_model.dart';
 import '../features/common/ui/Screens/main_bottom_nav_bar_screen.dart';
 import '../features/products/ui/screens/create_review_screen.dart';
 import '../features/products/ui/screens/product_details_screen.dart';
@@ -20,11 +21,11 @@ class AppRoutes {
       route = const SignUpScreen();
     } else if (settings.name == VerifyOTPScreen.name) {
       String email = settings.arguments as String;
-      route =  VerifyOTPScreen(email: email);
+      route = VerifyOTPScreen(email: email);
     } else if (settings.name == MainBottomNavBarScreen.name) {
       route = const MainBottomNavBarScreen();
     } else if (settings.name == ProductListScreen.name) {
-      final String category = settings.arguments as String;
+      final category = settings.arguments as CategoryModel;
       route = ProductListScreen(category: category);
     } else if (settings.name == ProductDetailsScreen.name) {
       route = const ProductDetailsScreen();

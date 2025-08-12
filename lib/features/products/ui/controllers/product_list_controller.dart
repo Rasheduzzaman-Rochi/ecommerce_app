@@ -1,7 +1,7 @@
 import 'package:ecommerce_app/app/app_urls.dart';
 import 'package:ecommerce_app/core/network_caller/network_caller.dart';
+import 'package:ecommerce_app/features/products/data/models/product_model.dart';
 import 'package:get/get.dart';
-import '../../../common/data/models/category_model.dart';
 
 class ProductListController extends GetxController {
   final int _perPageDataCount = 30;
@@ -14,7 +14,7 @@ class ProductListController extends GetxController {
 
   bool _isLoading = false;
 
-  List<CategoryModel> _categoryList = [];
+  final List<ProductModel> _productList = [];
 
   String? _errorMessage;
 
@@ -22,13 +22,13 @@ class ProductListController extends GetxController {
 
   int? get totalPages => _totalPages;
 
-  List<CategoryModel> get categoryList => _categoryList;
+  List<ProductModel> get productList => _productList;
 
   bool get isInitialLoading => _isInitialLoading;
 
   bool get isLoading => _isLoading;
 
-  Future<bool> getCategoryList() async {
+  Future<bool> getProductList(String categoryId) async {
     if (_totalPages != null && _currentPage > _totalPages!) {
       return true; // No more pages to load
     }
@@ -40,16 +40,20 @@ class ProductListController extends GetxController {
     }
     update();
     final NetworkResponse response = await Get.find<NetworkCaller>().getRequest(
-      url: AppUrls.categoryListUrl,
-      queryParams: {'count': _perPageDataCount, 'page': _currentPage},
+      url: AppUrls.productListUrl,
+      queryParams: {
+        'count': _perPageDataCount,
+        'page': _currentPage,
+        'category': categoryId,
+      },
     );
     if (response.isSuccess) {
-      List<CategoryModel> list = [];
+      List<ProductModel> list = [];
       for (Map<String, dynamic> data
-      in response.responseData?['data']['results']) {
-        list.add(CategoryModel.fromJson(data));
+          in response.responseData?['data']['results']) {
+        list.add(ProductModel.fromJson(data));
       }
-      _categoryList.addAll(list);
+      _productList.addAll(list);
       _totalPages = response.responseData!['data']['last_page'];
       _errorMessage = null;
       isSuccess = true;
@@ -66,10 +70,10 @@ class ProductListController extends GetxController {
     return isSuccess;
   }
 
-  Future<bool> refreshList() {
+  Future<bool> refreshList(String categoryId) {
     _currentPage = 0;
-    _categoryList = [];
+    _productList.clear();
     _isInitialLoading = true;
-    return getCategoryList();
+    return getProductList(categoryId);
   }
 }
